@@ -2,6 +2,7 @@
 <html>
 <head>
   <title>Read XLS</title>
+  <meta charset="UTF-8">
   <script type="text/javascript" src="./js/xlsx.full.min.js"></script>
   <script type="text/javascript" src="./js/jszip.js"></script>
   <script type="text/javascript" src="./js/code.js"></script>
@@ -32,9 +33,20 @@
       <span>IC code</span>
       <input type="text" name="ic_code" id="ic_code"/>
     </div>
+    <div>
+      <span>Type</span>
+      <select name="type" id="type">
+        <option value="0">ALL</option>
+        <option value="SUB">SUB</option>
+        <option value="RED">RED</option>
+        <option value="SWI">SWI</option>
+        <option value="SWO">SWO</option>
+      </select>
+    </div>
   </div>
   <div>
-    <button onclick="getResult();">result</button>
+    <button onclick="getResult1();">result</button>
+    <button onclick="getSum(getResult1());">sum</button>
   </div>
   <div id="ExcelTable"></div>
 

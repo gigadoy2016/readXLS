@@ -16,6 +16,7 @@ function UploadProcess() {
                 reader.onload = function (e) {
                     // GetTableFromExcel(e.target.result);
                     getData(e.target.result);
+                    console.log("upload Done");
                 };
                 reader.readAsBinaryString(fileUpload.files[0]);
             } else {
@@ -60,8 +61,8 @@ function getData(data){
       DATA_2.push(excelSheet2Rows[i]);
     }
   }
-  console.log(DATA_1);
-  console.log(DATA_2);
+  //console.log(DATA_1);
+  //console.log(DATA_2);
 }
 
 function GetTableFromExcel(data) {
@@ -181,4 +182,43 @@ function getResult(){
   var ExcelTable = document.getElementById("ExcelTable");
     ExcelTable.innerHTML = "";
     ExcelTable.appendChild(myTable);
+}
+
+function getResult1(){
+    let result = DATA_1;
+    let ic_name = document.getElementById('ic_name').value;
+    if(ic_name !== ""){
+        result = result.filter(c => c["IC Name"] == ic_name);
+    }        
+    
+    result = result.filter(c => c["Status"] === "Allotted");
+    
+    let type = document.getElementById('type').value;
+    console.log(type);
+    if(type !=="0"){
+        result = result.filter(c => c["TYPE"] === type);
+    }
+    console.log(result);
+    return result;
+}
+
+function getSum(datas){
+    let results= new Array();
+    for(let i=0 ;i<datas.length;i++){
+        let data = datas[i];
+        // console.log(data["Fund Code"]);
+        if(results.length ==0){
+            results.push(data);
+        }else{
+            console.log(results);
+            let index = results.findIndex(x => x["Fund Code"] === data["Fund Code"] );
+            if(index <0){
+                results.push(data);
+            }else{
+                let row = results[index];
+                row["Amount"] = (parseFloat(row["Amount"].replace(/[^0-9.-]+/g,"")) + parseFloat(data["Amount"].replace(/[^0-9.-]+/g,""))).toString();
+            }
+        }
+    }
+    console.log(results);
 }
