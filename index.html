@@ -29,7 +29,7 @@
     }
   </style>
   <script>
-    
+
     function numberFormat(num){
         return num.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
     }
@@ -81,15 +81,18 @@
             cell = row.insertCell(-1);          
             
             cell.innerHTML = numberFormat(amount);
+            cell.style.textAlign = "right";
 
             cell = row.insertCell(-1);
             cell.innerHTML = (amount===0)?"":numberFormat(promotion);
+            cell.style.textAlign = "right";
 
             cell = row.insertCell(-1);
             if(amount > 0){
               commission = Math.round(promotion * (amount/1000000));
             }
             cell.innerHTML = (commission===0)?"":numberFormat(commission);
+            cell.style.textAlign = "right";
           }
           total += commission;
         }
@@ -104,6 +107,7 @@
 
         cell = row.insertCell(-1);
         cell.innerHTML = numberFormat(total);
+        cell.style.textAlign = "right";
 
         var sellerTable = document.getElementById("sellerTable");
         sellerTable.innerHTML = "";
@@ -152,6 +156,7 @@
             
             cell = row.insertCell(-1);
             cell.innerHTML = numberFormat(datas[i]["Amount"]);
+            cell.style.textAlign = "right";
             
             cell = row.insertCell(-1);
             cell.innerHTML = datas[i]["IC Code"];
