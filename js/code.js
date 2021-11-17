@@ -243,6 +243,3 @@ function getAmountSum(code,datas){
         return sum;
     }
 }
-function numberFormat(num){
-    return num.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
-}
