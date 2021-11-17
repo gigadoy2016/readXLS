@@ -3,8 +3,7 @@ var DATA_2 = new Array();
 
 function UploadProcess() {
     //Reference the FileUpload element.    
-    var fileUpload = document.getElementById("fileUpload");
-    document.getElementById('upload').disabled = true;
+    var fileUpload = document.getElementById("fileUpload");        
 
     //Validate whether File is valid Excel file.
     var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.xls|.xlsx)$/;
@@ -33,6 +32,7 @@ function UploadProcess() {
                 };
                 reader.readAsArrayBuffer(fileUpload.files[0]);
             }
+            alert("Upload is OK");
         } else {
             alert("This browser does not support HTML5.");
         }
@@ -242,4 +242,7 @@ function getAmountSum(code,datas){
         }
         return sum;
     }
+}
+function numberFormat(num){
+    return num.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
 }

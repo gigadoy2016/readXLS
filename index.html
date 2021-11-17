@@ -29,6 +29,7 @@
     }
   </style>
   <script>
+
     function showBySeller(){
       let datas = getResult1();
       //console.log(datas);
@@ -64,29 +65,30 @@
         headerCell.innerHTML = "Pay for Sale";
         row.appendChild(headerCell);
         for (var i = 0; i < DATA_2.length; i++) {
-          var row = myTable.insertRow(-1);
-          
-          var cell = row.insertCell(-1);
-          cell.innerHTML = DATA_2[i]["Fund Code"]
-
-          cell = row.insertCell(-1);
           //Amount summary
           let amount = getAmountSum(DATA_2[i]["Fund Code"],datas);
           //let promotion =  Number(DATA_2[i]["Promotion"].replace(/[^0-9.-]+/g,""));
           let promotion =  Number(DATA_2[i]["Promotion"]);
           let commission = 0;
-          
-          cell.innerHTML = amount;
-
-          cell = row.insertCell(-1);
-          cell.innerHTML = (amount===0)?"":promotion;
-
-          cell = row.insertCell(-1);
           if(amount > 0){
-            commission = Math.round(promotion * (amount/1000000));
+            var row = myTable.insertRow(-1);
+
+            var cell = row.insertCell(-1);          
+            cell.innerHTML = DATA_2[i]["Fund Code"]
+            cell = row.insertCell(-1);          
+            
+            cell.innerHTML = numberFormat(amount);
+
+            cell = row.insertCell(-1);
+            cell.innerHTML = (amount===0)?"":numberFormat(promotion);
+
+            cell = row.insertCell(-1);
+            if(amount > 0){
+              commission = Math.round(promotion * (amount/1000000));
+            }
+            cell.innerHTML = (commission===0)?"":numberFormat(commission);
           }
-          cell.innerHTML = (commission===0)?"":commission ;
-          total += commission;          
+          total += commission;
         }
         row = myTable.insertRow(-1);
         cell = row.insertCell(-1);
@@ -98,66 +100,69 @@
         cell.innerHTML = "";
 
         cell = row.insertCell(-1);
-        cell.innerHTML = total;
+        cell.innerHTML = numberFormat(total);
 
         var sellerTable = document.getElementById("sellerTable");
         sellerTable.innerHTML = "";
         sellerTable.appendChild(myTable);
 
-        showLog(datas,"sellerLog");
+        
       }
+      showLog(datas,"sellerLog");
     }
     function showLog(datas,table_id){
-      //console.log(datas,"sellerLog");
+      console.log(datas,"sellerLog");
       let myTable  = document.createElement("table");
-      myTable.border = "1";
-      let row = myTable.insertRow(-1);
-      let headerCell = document.createElement("TH");
-      headerCell.innerHTML = "TYPE";
-      row.appendChild(headerCell);
-
-      headerCell = document.createElement("TH");
-      headerCell.innerHTML = "Fund Code";
-      row.appendChild(headerCell);
-
-      headerCell = document.createElement("TH");
-      headerCell.innerHTML = "Amount";
-      row.appendChild(headerCell);
-
-      headerCell = document.createElement("TH");
-      headerCell.innerHTML = "IC Code";
-      row.appendChild(headerCell);
-
-      headerCell = document.createElement("TH");
-      headerCell.innerHTML = "IC Name";
-      row.appendChild(headerCell);
-
-      for (let i = 0; i < datas.length; i++) {          
-        if(datas[i]["IC Name"] !== undefined){
-          let row = myTable.insertRow(-1);
-          let cell = row.insertCell(-1);
-          cell.innerHTML = datas[i].TYPE;
-
-          cell = row.insertCell(-1);
-          cell.innerHTML = datas[i]["Fund Code"];
-          
-          cell = row.insertCell(-1);
-          cell.innerHTML = datas[i]["Amount"];        
-          
-          cell = row.insertCell(-1);
-          cell.innerHTML = datas[i]["IC Code"];
-
-          cell = row.insertCell(-1);
-          cell.innerHTML = datas[i]["IC Name"];          
-          
-        }
-      }
-      
       let logTable = document.getElementById(table_id);
-      logTable.innerHTML = "";
-      logTable.appendChild(myTable);
 
+      if(datas.length>0){
+        myTable.border = "1";
+        let row = myTable.insertRow(-1);
+        let headerCell = document.createElement("TH");
+        headerCell.innerHTML = "TYPE";
+        row.appendChild(headerCell);
 
+        headerCell = document.createElement("TH");
+        headerCell.innerHTML = "Fund Code";
+        row.appendChild(headerCell);
+
+        headerCell = document.createElement("TH");
+        headerCell.innerHTML = "Amount";
+        row.appendChild(headerCell);
+
+        headerCell = document.createElement("TH");
+        headerCell.innerHTML = "IC Code";
+        row.appendChild(headerCell);
+
+        headerCell = document.createElement("TH");
+        headerCell.innerHTML = "IC Name";
+        row.appendChild(headerCell);
+
+        for (let i = 0; i < datas.length; i++) {          
+          if(datas[i]["IC Name"] !== undefined){
+            let row = myTable.insertRow(-1);
+            let cell = row.insertCell(-1);
+            cell.innerHTML = datas[i].TYPE;
+
+            cell = row.insertCell(-1);
+            cell.innerHTML = datas[i]["Fund Code"];
+            
+            cell = row.insertCell(-1);
+            cell.innerHTML = numberFormat(datas[i]["Amount"]);
+            
+            cell = row.insertCell(-1);
+            cell.innerHTML = datas[i]["IC Code"];
+
+            cell = row.insertCell(-1);
+            cell.innerHTML = datas[i]["IC Name"];          
+            
+          }
+        }        
+        logTable.innerHTML = "";
+        logTable.appendChild(myTable);
+      }else{
+        logTable.innerHTML = "";
+      }
     }
   </script>
 </head>
@@ -165,37 +170,37 @@
   <div>
     <form action="" method="post" enctype="multipart/form-data" onsubmit="return false;">
       Select Excel to upload:
-      <input type="file" name="fileUpload" id="fileUpload">
-      <input type="submit" id='upload' value="Upload Excel" name="submit" onclick="UploadProcess()">
+      <input type="file" name="fileUpload" id="fileUpload" onchange="UploadProcess()">
+      <!--<input type="submit" id='upload' value="Upload Excel" name="submit" onclick="UploadProcess()">-->
     </form>
   </div>
-  <div id="setSeller">
-    <div>
-      <span>
-        <label>IC name:</label>
-        <input type="text" name="ic_name" id="ic_name"/>
-        <span> or </span>
-        <span>IC code</span>
-        <input type="text" name="ic_code" id="ic_code"/>
-      </span>
+  <div id="div_input">
+    <div id="setSeller">
+      <div>
+        <span>
+          <label>IC name:</label>
+          <input type="text" name="ic_name" id="ic_name"/>
+          <span> or </span>
+          <span>IC code</span>
+          <input type="text" name="ic_code" id="ic_code"/>
+        </span>
+      </div>
+      
+      <div>
+        <span>Type</span>
+        <select name="type" id="type">
+          <option value="0">ALL</option>
+          <option value="SUB">SUB</option>
+          <option value="SWI">SWI</option>
+        </select>
+      </div>
     </div>
-    
     <div>
-      <span>Type</span>
-      <select name="type" id="type">
-        <option value="0">ALL</option>
-        <option value="SUB">SUB</option>
-        <option value="RED">RED</option>
-        <option value="SWI">SWI</option>
-        <option value="SWO">SWO</option>
-      </select>
+      <!--<button onclick="getResult1();">result</button>-->
+      <button onclick="showBySeller();">show</button>
+      <span> </span>
+      <button id="xlxs" onclick="click1();">Create XLS</button>
     </div>
-  </div>
-  <div>
-    <!--<button onclick="getResult1();">result</button>-->
-    <button onclick="showBySeller();">show</button>
-    <span> </span>
-    <button id="xlxs" onclick="click1();">Create XLS</button>
   </div>
   <hr>
   <div>
