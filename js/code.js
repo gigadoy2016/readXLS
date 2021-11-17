@@ -141,7 +141,7 @@ function GetTableFromExcel(data) {
         cell.innerHTML = excelRows[i]["Status"];
         
         cell = row.insertCell(-1);
-        cell.innerHTML = excelRows[i]["IC Code"];
+        cell.innerHTML = excelRows[i]["IC"];
 
         cell = row.insertCell(-1);
         cell.innerHTML = excelRows[i]["IC Name"];
@@ -185,18 +185,21 @@ function getResult(){
     ExcelTable.appendChild(myTable);
 }
 
-function getResult1(){
+async function getResult1(){
     let result = DATA_1;
-    let ic_name = document.getElementById('ic_name').value;
-    let ic_code = document.getElementById('ic_code').value;
+    let ic_name = document.getElementById('ic_name').value.trim();
+    let ic_code = document.getElementById('ic_code').value.trim();
+
     if(ic_name !== ""){
-        result = result.filter(c => c["IC Name"] == ic_name);
+        //if(typeof result["IC Name"] !== "undefined"){
+            result =await result.filter(c => c["IC Name"] == ic_name); 
+        //}
     }
     if(ic_code !== ""){
-        result = result.filter(c => c["IC Code"] == ic_code);
+        result =await result.filter(c => c["IC"] == ic_code);
     }
     
-    result = result.filter(c => c["Status"] === "Allotted");
+    result =await result.filter(c => c["Status"] === "Allotted");
     
     let type = document.getElementById('type').value;
     // console.log(type);
