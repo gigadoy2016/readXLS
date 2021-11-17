@@ -232,7 +232,8 @@ function getAmountSum(code,datas){
         let sum = 0;
         for(let i=0 ;i<results.length;i++){
             let data = results[i];
-            sum = sum + Number(data["Amount"].replace(/[^0-9.-]+/g,""));
+            //sum = sum + Number(data["Amount"].replace(/[^0-9.-]+/g,""));
+            sum = sum + Number(data["Amount"]);
         }
         return sum;
     }
