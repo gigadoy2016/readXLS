@@ -161,7 +161,7 @@
 <body>
   <div>
     <form action="" method="post" enctype="multipart/form-data" onsubmit="return false;">
-      Select image to upload:
+      Select Excel to upload:
       <input type="file" name="fileUpload" id="fileUpload">
       <input type="submit" value="Upload Excel" name="submit" onclick="UploadProcess()">
     </form>
@@ -171,12 +171,12 @@
       <span>
         <label>IC name:</label>
         <input type="text" name="ic_name" id="ic_name"/>
+        <span> or </span>
+        <span>IC code</span>
+        <input type="text" name="ic_code" id="ic_code"/>
       </span>
     </div>
-    <div>
-      <span>IC code</span>
-      <input type="text" name="ic_code" id="ic_code"/>
-    </div>
+    
     <div>
       <span>Type</span>
       <select name="type" id="type">
@@ -189,7 +189,7 @@
     </div>
   </div>
   <div>
-    <button onclick="getResult1();">result</button>
+    <!--<button onclick="getResult1();">result</button>-->
     <button onclick="showBySeller();">show</button>
   </div>
   <hr>
