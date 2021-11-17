@@ -2,8 +2,9 @@ var DATA_1 = new Array();
 var DATA_2 = new Array();
 
 function UploadProcess() {
-    //Reference the FileUpload element.
+    //Reference the FileUpload element.    
     var fileUpload = document.getElementById("fileUpload");
+    document.getElementById('upload').disabled = true;
 
     //Validate whether File is valid Excel file.
     var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.xls|.xlsx)$/;
@@ -187,9 +188,13 @@ function getResult(){
 function getResult1(){
     let result = DATA_1;
     let ic_name = document.getElementById('ic_name').value;
+    let ic_code = document.getElementById('ic_code').value;
     if(ic_name !== ""){
         result = result.filter(c => c["IC Name"] == ic_name);
-    }        
+    }
+    if(ic_code !== ""){
+        result = result.filter(c => c["IC Code"] == ic_code);
+    }
     
     result = result.filter(c => c["Status"] === "Allotted");
     

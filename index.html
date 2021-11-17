@@ -166,7 +166,7 @@
     <form action="" method="post" enctype="multipart/form-data" onsubmit="return false;">
       Select Excel to upload:
       <input type="file" name="fileUpload" id="fileUpload">
-      <input type="submit" value="Upload Excel" name="submit" onclick="UploadProcess()">
+      <input type="submit" id='upload' value="Upload Excel" name="submit" onclick="UploadProcess()">
     </form>
   </div>
   <div id="setSeller">
@@ -194,6 +194,8 @@
   <div>
     <!--<button onclick="getResult1();">result</button>-->
     <button onclick="showBySeller();">show</button>
+    <span> </span>
+    <button id="xlxs" onclick="click1();">Create XLS</button>
   </div>
   <hr>
   <div>
@@ -210,7 +212,7 @@
     </div>
   </div>
   <div>
-    <button id="xlxs" onclick="click1();">Create XLS</button>
+    
     <script>
       
       function s2ab(s) {
