@@ -194,11 +194,11 @@ function getResult1(){
     result = result.filter(c => c["Status"] === "Allotted");
     
     let type = document.getElementById('type').value;
-    console.log(type);
+    // console.log(type);
     if(type !=="0"){
         result = result.filter(c => c["TYPE"] === type);
     }
-    console.log(result);
+    // console.log(result);
     return result;
 }
 
@@ -221,4 +221,19 @@ function getSum(datas){
         }
     }
     console.log(results);
+}
+function getAmountSum(code,datas){
+    //console.log(code);
+    
+    let results = datas.filter(c => c["Fund Code"] === code);
+    if(results ==0){
+        return 0;
+    }else{
+        let sum = 0;
+        for(let i=0 ;i<results.length;i++){
+            let data = results[i];
+            sum = sum + Number(data["Amount"].replace(/[^0-9.-]+/g,""));
+        }
+        return sum;
+    }
 }
