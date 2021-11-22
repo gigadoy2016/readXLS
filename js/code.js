@@ -55,6 +55,11 @@ function getData(data){
     if(excelRows[i]["IC"] !== undefined){
       DATA_1.push(excelRows[i]);
     }
+    if(excelRows[i]["IC Code"] !== undefined){
+        excelRows[i]["IC"] = excelRows[i]["IC Code"];
+        DATA_1.push(excelRows[i]);
+      }
+
   }
   let excelSheet2Rows = XLSX.utils.sheet_to_row_object_array(workbook.Sheets[Sheet_2]);
   for (let i = 0; i < excelSheet2Rows.length; i++) {
@@ -218,7 +223,7 @@ function getSum(datas){
         if(results.length ==0){
             results.push(data);
         }else{
-            console.log(results);
+            // console.log(results);
             let index = results.findIndex(x => x["Fund Code"] === data["Fund Code"] );
             if(index <0){
                 results.push(data);
@@ -228,7 +233,7 @@ function getSum(datas){
             }
         }
     }
-    console.log(results);
+    // console.log(results);
 }
 function getAmountSum(code,datas){
     //console.log(code);

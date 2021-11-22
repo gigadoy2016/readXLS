@@ -39,8 +39,8 @@
       if(datas.length ==0){
         document.getElementById("sellerTable").innerHTML = "No Data";
       }else{
-        console.log(datas[0]);
-        console.log(Object.keys(datas[0]));
+        // console.log(datas[0]);
+        // console.log(Object.keys(datas[0]));
         //let memberName = datas[0]["IC Name"];
         let memberCode = datas[0]["IC"];
         //console.log(memberCode);
@@ -120,7 +120,7 @@
       showLog(datas,"sellerLog");
     }
     function showLog(datas,table_id){
-      console.log(datas,"sellerLog");
+      // console.log(datas,"sellerLog");
       let myTable  = document.createElement("table");
       let logTable = document.getElementById(table_id);
 
