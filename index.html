@@ -41,13 +41,13 @@
       }else{
         console.log(datas[0]);
         console.log(Object.keys(datas[0]));
-        let memberName = datas[0]["IC Name"];
+        //let memberName = datas[0]["IC Name"];
         let memberCode = datas[0]["IC"];
         //console.log(memberCode);
         let total =0;
 
         document.getElementById("label_ic_code").innerHTML = memberCode;
-        document.getElementById("label_ic_name").innerHTML = memberName;
+        //document.getElementById("label_ic_name").innerHTML = memberName;
 
         var myTable  = document.createElement("table");
         myTable.setAttribute("id", "memberAmount");
@@ -143,9 +143,9 @@
         headerCell.innerHTML = "IC Code";
         row.appendChild(headerCell);
 
-        headerCell = document.createElement("TH");
-        headerCell.innerHTML = "IC Name";
-        row.appendChild(headerCell);
+        // headerCell = document.createElement("TH");
+        // headerCell.innerHTML = "IC Name";
+        // row.appendChild(headerCell);
 
         for (let i = 0; i < datas.length; i++) {          
           if(datas[i]["IC Name"] !== undefined){
@@ -163,8 +163,8 @@
             cell = row.insertCell(-1);
             cell.innerHTML = datas[i]["IC"];
 
-            cell = row.insertCell(-1);
-            cell.innerHTML = datas[i]["IC Name"];          
+            // cell = row.insertCell(-1);
+            // cell.innerHTML = datas[i]["IC Name"];          
             
           }
         }        
@@ -188,9 +188,9 @@
     <div id="setSeller">
       <div>
         <span>
-          <label>IC name:</label>
+          <!--<label>IC name:</label>
           <input type="text" name="ic_name" id="ic_name"/>
-          <span> or </span>
+          <span> or </span>-->
           <span>IC code</span>
           <input type="text" name="ic_code" id="ic_code"/>
         </span>
@@ -216,8 +216,13 @@
   <div>
     <div>
       <table id="s">
-        <tr><th>IC Code</th><th>IC Name</th></tr>
-        <tr><td><div id='label_ic_code'></div></td><td><div id='label_ic_name'></div></td></tr>
+        <tr><th>IC Code</th>
+          <!--<th>IC Name</th>-->
+        </tr>
+        <tr>
+          <td><div id='label_ic_code'></div></td>
+          <!--<td><div id='label_ic_name'></div></td>-->
+        </tr>
       </table>
     </div>
     <div id="sellerTable">      

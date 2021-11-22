@@ -52,7 +52,7 @@ function getData(data){
   //Read all rows from First Sheet into an JSON array.
   let excelRows = XLSX.utils.sheet_to_row_object_array(workbook.Sheets[Sheet_1]);
   for (let i = 0; i < excelRows.length; i++) {
-    if(excelRows[i]["IC Name"] !== undefined){
+    if(excelRows[i]["IC"] !== undefined){
       DATA_1.push(excelRows[i]);
     }
   }
@@ -107,17 +107,17 @@ function GetTableFromExcel(data) {
     row.appendChild(headerCell);
      
     headerCell = document.createElement("TH");
-    headerCell.innerHTML = "IC Code";
+    headerCell.innerHTML = "IC";
     row.appendChild(headerCell);
 
-    headerCell = document.createElement("TH");
-    headerCell.innerHTML = "IC Name";
-    row.appendChild(headerCell);
+    // headerCell = document.createElement("TH");
+    // headerCell.innerHTML = "IC Name";
+    // row.appendChild(headerCell);
 
 
     //Add the data rows from Excel file.
     for (var i = 0; i < excelRows.length; i++) {          
-      if(excelRows[i]["IC Name"] !== undefined){
+      if(excelRows[i]["IC"] !== undefined){
         //Add the data row.
         var row = myTable.insertRow(-1);
 
@@ -143,8 +143,8 @@ function GetTableFromExcel(data) {
         cell = row.insertCell(-1);
         cell.innerHTML = excelRows[i]["IC"];
 
-        cell = row.insertCell(-1);
-        cell.innerHTML = excelRows[i]["IC Name"];
+        // cell = row.insertCell(-1);
+        // cell.innerHTML = excelRows[i]["IC Name"];
         
         console.log(excelRows[i]);
         
@@ -187,14 +187,14 @@ function getResult(){
 
 async function getResult1(){
     let result = DATA_1;
-    let ic_name = document.getElementById('ic_name').value.trim();
+    // let ic_name = document.getElementById('ic_name').value.trim();
     let ic_code = document.getElementById('ic_code').value.trim();
 
-    if(ic_name !== ""){
+    // if(ic_name !== ""){
         //if(typeof result["IC Name"] !== "undefined"){
-            result =await result.filter(c => c["IC Name"] == ic_name); 
+            // result =await result.filter(c => c["IC Name"] == ic_name); 
         //}
-    }
+    // }
     if(ic_code !== ""){
         result =await result.filter(c => c["IC"] == ic_code);
     }
