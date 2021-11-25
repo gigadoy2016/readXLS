@@ -6,7 +6,9 @@ function UploadProcess() {
     var fileUpload = document.getElementById("fileUpload");        
 
     //Validate whether File is valid Excel file.
-    var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.xls|.xlsx)$/;
+    var regex = /^([a-zA-Z0-9\(\)\s_\\.\-:])+(.xls|.xlsx)$/;
+    console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+    console.log(regex.test(fileUpload.value.toLowerCase()));
     if (regex.test(fileUpload.value.toLowerCase())) {
         if (typeof (FileReader) != "undefined") {
             var reader = new FileReader();
