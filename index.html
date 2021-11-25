@@ -3,6 +3,7 @@
 <head>
   <title>Read XLS</title>
   <meta charset="UTF-8">
+  <meta http-equiv="Cashe-Control" content="no-store" />
   <script type="text/javascript" src="./js/xlsx.full.min.js"></script>
   <script type="text/javascript" src="./js/jszip.js"></script>
   <script type="text/javascript" src="./js/code.js"></script>
@@ -30,12 +31,18 @@
   </style>
   <script>
 
-    function numberFormat(num){
+    function numberFormat(num){      
+      if(num !== ""){
         return num.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+      }else{
+        return "";
+      }
     }
     async function showBySeller(){
       let datas =await getResult1();
-      //console.log(datas);
+      // console.log("***-------------------------------------");
+      // console.log(datas);
+      
       if(datas.length ==0){
         document.getElementById("sellerTable").innerHTML = "No Data";
       }else{
@@ -120,7 +127,8 @@
       showLog(datas,"sellerLog");
     }
     function showLog(datas,table_id){
-      // console.log(datas,"sellerLog");
+      console.log("--------------show log-----------------------");
+      //console.log(datas);
       let myTable  = document.createElement("table");
       let logTable = document.getElementById(table_id);
 
@@ -147,11 +155,15 @@
         // headerCell.innerHTML = "IC Name";
         // row.appendChild(headerCell);
 
+        datas = datas.sort(function(a,b){
+          return b.Amount - a.Amount;
+        });
+
         for (let i = 0; i < datas.length; i++) {          
-          if(datas[i]["IC Name"] !== undefined){
+          if(datas[i]["IC"] !== undefined){
             let row = myTable.insertRow(-1);
             let cell = row.insertCell(-1);
-            cell.innerHTML = datas[i].TYPE;
+            cell.innerHTML = datas[i]["Transaction Type"];
 
             cell = row.insertCell(-1);
             cell.innerHTML = datas[i]["Fund Code"];

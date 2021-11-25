@@ -43,6 +43,7 @@ function UploadProcess() {
 
 function getData(data){
   //Read the Excel File data in binary
+  //console.log("---Read the Excel File data in binary");
   var workbook = XLSX.read(data, {
         type: 'binary'
     });
@@ -50,6 +51,7 @@ function getData(data){
   let Sheet_1 = workbook.SheetNames[0];
   let Sheet_2 = workbook.SheetNames[1];
   //Read all rows from First Sheet into an JSON array.
+
   let excelRows = XLSX.utils.sheet_to_row_object_array(workbook.Sheets[Sheet_1]);
   for (let i = 0; i < excelRows.length; i++) {
     if(excelRows[i]["IC"] !== undefined){
@@ -67,8 +69,8 @@ function getData(data){
       DATA_2.push(excelSheet2Rows[i]);
     }
   }
-  //console.log(DATA_1);
-  //console.log(DATA_2);
+//   console.log(DATA_1);
+//   console.log(DATA_2);
 }
 
 function GetTableFromExcel(data) {
@@ -134,7 +136,7 @@ function GetTableFromExcel(data) {
         cell.innerHTML = excelRows[i]["Transaction Date"]
 
         cell = row.insertCell(-1);
-        cell.innerHTML = excelRows[i].TYPE;
+        cell.innerHTML = excelRows[i]["Transaction Type"];
 
         cell = row.insertCell(-1);
         cell.innerHTML = excelRows[i]["Fund Code"];
@@ -192,6 +194,9 @@ function getResult(){
 
 async function getResult1(){
     let result = DATA_1;
+
+    console.log("-getResult1------------------------------------");
+    console.log(result);
     // let ic_name = document.getElementById('ic_name').value.trim();
     let ic_code = document.getElementById('ic_code').value.trim();
 
@@ -201,17 +206,17 @@ async function getResult1(){
         //}
     // }
     if(ic_code !== ""){
-        result =await result.filter(c => c["IC"] == ic_code);
+        result =await result.filter(c => c["IC"].trim().toUpperCase() == ic_code.toUpperCase());
     }
     
-    result =await result.filter(c => c["Status"] === "Allotted");
+    result =await result.filter(c => c["Status"].trim().toUpperCase() === "ALLOTTED");
     
-    let type = document.getElementById('type').value;
-    // console.log(type);
+    let type = document.getElementById('type').value.trim();
+     console.log(type);
     if(type !=="0"){
-        result = result.filter(c => c["TYPE"] === type);
+        result = result.filter(c => c["Transaction Type"].trim() === type);
     }
-    // console.log(result);
+     console.log(result);
     return result;
 }
 
@@ -224,7 +229,7 @@ function getSum(datas){
             results.push(data);
         }else{
             // console.log(results);
-            let index = results.findIndex(x => x["Fund Code"] === data["Fund Code"] );
+            let index = results.findIndex(x => x["Fund Code"].trim() === data["Fund Code"].trim() );
             if(index <0){
                 results.push(data);
             }else{
@@ -238,7 +243,7 @@ function getSum(datas){
 function getAmountSum(code,datas){
     //console.log(code);
     
-    let results = datas.filter(c => c["Fund Code"] === code);
+    let results = datas.filter(c => c["Fund Code"].trim().toUpperCase() === code.trim().toUpperCase());
     if(results ==0){
         return 0;
     }else{
