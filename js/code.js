@@ -3,6 +3,8 @@ var DATA_2 = new Array();
 
 function UploadProcess() {
     //Reference the FileUpload element.    
+    DATA_1 = new Array();
+    DATA_2 = new Array();
     var fileUpload = document.getElementById("fileUpload");        
 
     //Validate whether File is valid Excel file.
