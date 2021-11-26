@@ -52,8 +52,12 @@
         let memberCode = datas[0]["IC"];
         //console.log(memberCode);
         let total =0;
-
-        document.getElementById("label_ic_code").innerHTML = memberCode;
+        if(document.getElementById("ic_code").value.trim()===""){
+          document.getElementById("label_ic_code").innerHTML = "ALL";  
+        }else{
+          document.getElementById("label_ic_code").innerHTML = document.getElementById("ic_code").value;
+        }
+        
         //document.getElementById("label_ic_name").innerHTML = memberName;
 
         var myTable  = document.createElement("table");

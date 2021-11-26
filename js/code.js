@@ -209,6 +209,9 @@ async function getResult1(){
             // result =await result.filter(c => c["IC Name"] == ic_name); 
         //}
     // }
+    // result =await result.filter(c => c["Transaction Type"].trim().toUpperCase() == "");
+    // result =await result.filter(c => c["Transaction Type"].trim().toUpperCase() == "");
+
     if(ic_code !== ""){
         result =await result.filter(c => c["IC"].trim().toUpperCase() == ic_code.toUpperCase());
     }
@@ -216,11 +219,21 @@ async function getResult1(){
     result =await result.filter(c => c["Status"].trim().toUpperCase() === "ALLOTTED");
     
     let type = document.getElementById('type').value.trim();
-     console.log(type);
+     //console.log(type);
     if(type !=="0"){
         result = result.filter(c => c["Transaction Type"].trim() === type);
     }
-     console.log(result);
+    //console.log(result);
+    
+    console.log("+++++++++++++++++++++++++++++++++++++++");
+    //var test =await result.filter(c => c["Transaction Type"].trim().toUpperCase() == "SWI");
+    result =await result.filter(function(trans){
+        let tran = trans["Transaction Type"].trim().toUpperCase();
+        if(tran === "SWI" || tran === "SUB"){
+            return true;
+        }
+    });
+    console.log("+++++++++++++++++++++++++++++++++++++++");
     return result;
 }
 
