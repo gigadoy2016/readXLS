@@ -155,6 +155,10 @@
         headerCell.innerHTML = "IC Code";
         row.appendChild(headerCell);
 
+        headerCell = document.createElement("TH");
+        headerCell.innerHTML = "Status";
+        row.appendChild(headerCell);
+
         // headerCell = document.createElement("TH");
         // headerCell.innerHTML = "IC Name";
         // row.appendChild(headerCell);
@@ -179,8 +183,8 @@
             cell = row.insertCell(-1);
             cell.innerHTML = datas[i]["IC"];
 
-            // cell = row.insertCell(-1);
-            // cell.innerHTML = datas[i]["IC Name"];          
+            cell = row.insertCell(-1);
+            cell.innerHTML = datas[i]["Status"];          
             
           }
         }        

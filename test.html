@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script>
+        const member = ["A","E"];
+        const students =[
+            {name:"A",grade:96},
+            {name:"B",grade:84},
+            {name:"C",grade:100},
+            {name:"D",grade:65},
+            {name:"E",grade:90},
+        ];
+        function search(x){
+            console.log(x.filter(function(member){
+                return member.name == "A" || member.name == "E";
+            
+            }));
+        }
+
+        search(students);
+    </script>
+</head>
+<body>
+    <div id="show"></div>
+</body>

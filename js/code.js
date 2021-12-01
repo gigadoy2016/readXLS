@@ -216,7 +216,14 @@ async function getResult1(){
         result =await result.filter(c => c["IC"].trim().toUpperCase() == ic_code.toUpperCase());
     }
     
-    result =await result.filter(c => c["Status"].trim().toUpperCase() === "ALLOTTED");
+    //result =await result.filter(c => c["Status"].trim().toUpperCase() === "ALLOTTED");
+    result =await result.filter(function(c){
+            return c["Status"].trim().toUpperCase() === "ALLOTTED" ||
+            c["Status"].trim().toUpperCase() === "APPROVED" || 
+            c["Status"].trim().toUpperCase() === "SUBMITTED" ||
+            c["Status"].trim().toUpperCase() === "WAITING";
+        }
+    );
     
     let type = document.getElementById('type').value.trim();
      //console.log(type);
