@@ -83,7 +83,6 @@
         for (var i = 0; i < DATA_2.length; i++) {
           //Amount summary test
           let amount = getAmountSum(DATA_2[i]["Fund Code"],datas);
-          //let promotion =  Number(DATA_2[i]["Promotion"].replace(/[^0-9.-]+/g,""));
           let promotion =  Number(DATA_2[i]["Promotion"]);
           let commission = 0;
           if(amount > 0){

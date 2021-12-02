@@ -265,7 +265,9 @@ function getSum(datas){
     // console.log(results);
 }
 function getAmountSum(code,datas){
-    //console.log(code);
+    console.log("+ getAmountSum +++++++++++++++++++++");
+    console.log(code);
+    console.log(datas);
     
     let results = datas.filter(c => c["Fund Code"].trim().toUpperCase() === code.trim().toUpperCase());
     if(results ==0){
