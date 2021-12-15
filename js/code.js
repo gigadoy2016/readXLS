@@ -9,7 +9,7 @@ function UploadProcess() {
 
     //Validate whether File is valid Excel file.
     var regex = /^([a-zA-Z0-9\(\)\s_\\.\-:])+(.xls|.xlsx)$/;
-    console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+    console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>test");
     console.log(regex.test(fileUpload.value.toLowerCase()));
     if (regex.test(fileUpload.value.toLowerCase())) {
         if (typeof (FileReader) != "undefined") {
@@ -122,6 +122,10 @@ function GetTableFromExcel(data) {
     row.appendChild(headerCell);
 
     // headerCell = document.createElement("TH");
+    // headerCell.innerHTML = "Transaction ID";
+    // row.appendChild(headerCell);
+
+    // headerCell = document.createElement("TH");
     // headerCell.innerHTML = "IC Name";
     // row.appendChild(headerCell);
 
@@ -153,6 +157,9 @@ function GetTableFromExcel(data) {
         
         cell = row.insertCell(-1);
         cell.innerHTML = excelRows[i]["IC"];
+
+        cell = row.insertCell(-1);
+        cell.innerHTML = excelRows[i]["Transaction ID"];
 
         // cell = row.insertCell(-1);
         // cell.innerHTML = excelRows[i]["IC Name"];
@@ -282,3 +289,4 @@ function getAmountSum(code,datas){
         return sum;
     }
 }
+

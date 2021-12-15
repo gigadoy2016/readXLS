@@ -8,6 +8,7 @@
   <script type="text/javascript" src="./js/jszip.js"></script>
   <script type="text/javascript" src="./js/code.js"></script>
   <script type="text/javascript" src="./js/FileSaver.js"></script>
+
   
   <style>
     div{
@@ -31,6 +32,7 @@
   </style>
   <script>
 
+    
     function numberFormat(num){      
       if(num !== ""){
         return num.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
@@ -129,8 +131,16 @@
       }
       showLog(datas,"sellerLog");
     }
-    function showLog(datas,table_id){
+    async function showLog(datas,table_id){
       console.log("--------------show log-----------------------");
+      let temp=[];
+      datas = datas.filter((item)=>{
+        if(!temp.includes(item["Transaction ID"])){
+          temp.push(item["Transaction ID"])
+          return true;
+        }
+      });
+
       //console.log(datas);
       let myTable  = document.createElement("table");
       let logTable = document.getElementById(table_id);
@@ -158,9 +168,9 @@
         headerCell.innerHTML = "Status";
         row.appendChild(headerCell);
 
-        // headerCell = document.createElement("TH");
-        // headerCell.innerHTML = "IC Name";
-        // row.appendChild(headerCell);
+        headerCell = document.createElement("TH");
+        headerCell.innerHTML = "Transaction ID";
+        row.appendChild(headerCell);
 
         datas = datas.sort(function(a,b){
           return b.Amount - a.Amount;
@@ -183,7 +193,10 @@
             cell.innerHTML = datas[i]["IC"];
 
             cell = row.insertCell(-1);
-            cell.innerHTML = datas[i]["Status"];          
+            cell.innerHTML = datas[i]["Status"];
+
+            cell = row.insertCell(-1);
+            cell.innerHTML = datas[i]["Transaction ID"];
             
           }
         }        
